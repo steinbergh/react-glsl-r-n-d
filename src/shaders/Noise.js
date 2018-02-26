@@ -36,7 +36,7 @@ const shaders = GL.Shaders.create({
         }
 
         void main () {
-            gl_FragColor = texture2D(tex, noise(st));
+            gl_FragColor = texture2D(tex, vec2(noise(uv)));
         }
         `
     }

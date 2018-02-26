@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Gradient from './shaders/Gradient';
-import Retro from './shaders/Retro';
+import Noise from './shaders/Noise';
 import { Surface } from 'gl-react-dom';
 
 import {
@@ -20,15 +20,13 @@ class Animated extends Component {
         const { time } = this.props;
         return (
             <Surface width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
-                <Retro
-                    res_x={this.props.retro_res_x}
-                    res_y={this.props.retro_res_y}>
-                    <Gradient
-                        color_stop_1={this.props.color_stop_1}
-                        color_stop_2={this.props.color_stop_2}
-                        time={time}
-                    />
-                </Retro>
+                {/* <Noise> */}
+                <Gradient
+                    color_stop_1={this.props.color_stop_1}
+                    color_stop_2={this.props.color_stop_2}
+                    time={time}
+                />
+                {/* </Noise> */}
             </Surface>
         );
     }

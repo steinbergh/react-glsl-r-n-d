@@ -20,14 +20,14 @@ const shaders = GL.Shaders.create({
          
         //make a new color from the offset colors
          
-        gl_FragColor = vec4( redValue, greenValue, blueValue, 1.0f);
+        gl_FragColor = vec4( redValue, greenValue, blueValue, 1.0);
         }
         `
     }
 });
 
 export default GL.createComponent(
-    ({ offset_r, offset_g, offset_b, children: tex }) => (
+    ({ offset_r = 0, offset_g = 0, offset_b = 0, children: tex }) => (
         <GL.Node
             shader={shaders.chromaticAberration}
             uniforms={{ offsets: [offset_r, offset_g, offset_b], tex }}

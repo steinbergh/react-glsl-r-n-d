@@ -23,13 +23,24 @@ const shaders = GL.Shaders.create({
                 //temporarily store the resolution as local var
                 vec2 st = uv;
                 
-                //remap space from -1 to 1
-                st = st *2.-1.;
+                //translate space
+                vec2 translate = vec2(mod(time * .00005, 2.0), 0.0);
+                st += translate;
+
+                //give cells indices
+                float index = 0.0;
+                index += step(1., mod(st.x,2.0));
+
+                //space now repeats
+                st = fract(st);
+
+                //check index and alternate gradients for smooth infinite movement
+                float pct = index == 0.0 ? smoothstep(1.0, 0.0, st.x) : smoothstep(1.0, 0.0, 1.-st.x);
                 
-                float pct = sin(time * .0005) + length(st);
-                
-                gl_FragColor = mix(color_stop_1,color_stop_2, parabola(pct, 7.));
-        
+                //mix our colors
+                vec4 color = mix(color_stop_1, color_stop_2, pct);
+
+                gl_FragColor = color;
             }
         `
     }
