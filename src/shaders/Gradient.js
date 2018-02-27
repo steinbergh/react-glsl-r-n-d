@@ -28,7 +28,7 @@ const shaders = GL.Shaders.create({
                 //temporarily store the resolution as local var
                 vec2 st = uv;
                 
-                st = scale(vec2(0.5)) * st;
+                st = scale(vec2(0.66)) * st;
 
                 //translate space
                 vec2 translate = vec2(mod(time * .00009, 2.0), 0.0);
