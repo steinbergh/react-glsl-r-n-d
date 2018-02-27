@@ -18,13 +18,20 @@ const shaders = GL.Shaders.create({
                 return pow( 4.0*x*(1.0-x), k );
             }
 
+            mat2 scale(vec2 _scale){
+                return mat2(_scale.x,0.0,
+                            0.0,_scale.y);
+            }
+
             void main () {
                 
                 //temporarily store the resolution as local var
                 vec2 st = uv;
                 
+                st = scale(vec2(0.5)) * st;
+
                 //translate space
-                vec2 translate = vec2(mod(time * .00005, 2.0), 0.0);
+                vec2 translate = vec2(mod(time * .00009, 2.0), 0.0);
                 st += translate;
 
                 //give cells indices
@@ -37,6 +44,7 @@ const shaders = GL.Shaders.create({
                 //check index and alternate gradients for smooth infinite movement
                 float pct = index == 0.0 ? smoothstep(1.0, 0.0, st.x) : smoothstep(1.0, 0.0, 1.-st.x);
                 
+
                 //mix our colors
                 vec4 color = mix(color_stop_1, color_stop_2, pct);
 
